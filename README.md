@@ -1,5 +1,7 @@
 # ConsumerGraph
 
+[![Build Status](https://travis-ci.org/ApplauseOSS/ConsumerGraph.svg?branch=master)](https://travis-ci.org/ApplauseOSS/ConsumerGraph)
+
 A small utility to browse Kafka topic-to-consumer relationships. Each node is collapsible.
 
 ***NOTE*** - This supports installations with offsets stored in Kafka. Offsets stored in Zookeeper are not supported.
@@ -26,8 +28,10 @@ The following env vars are recognized by the image:
 |`LOG_LEVEL` | ***NONE*** | The logging level for log4j, [ALL &#124; DEBUG &#124; ERROR &#124; FATAL &#124; INFO &#124; OFF &#124; TRACE &#124; WARN] | `INFO` |
 |`UI_STYLE` | ***NONE*** | The UI style to use, [graph &#124; tree] | `tree` |
 
-# Running
-The easiest way to build and run ConsumerGraph is via the build script. You will need Maven and Docker installed.
+# Building and Running
+ConsumerGraph is available on [Docker hub](https://hub.docker.com/search/?q=consumergraph).
+
+The easiest way to build it is via the build script. You will need Maven and Docker installed.
 ~~~~~
 $ ./build.sh
 $ docker run -p 9913:9913 \

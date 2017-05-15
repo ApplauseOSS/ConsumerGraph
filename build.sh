@@ -17,6 +17,3 @@ echo "*** Tagging ConsumerGraph Docker image ***"
 docker tag consumergraph consumergraph:latest
 docker tag consumergraph consumergraph:"${VERSION}"
 
-echo "*** Cleaning up ***"
-rm Dockerfile
-rm scripts/run.sh
