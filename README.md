@@ -43,3 +43,13 @@ $ docker run -p 9913:9913 \
 
 # Development
 You can build ConsumerGraph with the Maven using the standard lifecycle phases.
+
+# Version Compatibility
+This was built/tested using the following versions.
+
+| Component | Version |
+|:------------------|:-----------|
+| Maven | `3.3.9` |
+| Docker | `17.03.0-ce, build 60ccb22` |
+| Java | `1.8.0_121` |
+| Kafka | `0.10.1.0` |
