@@ -1,0 +1,28 @@
+
+# port for the server
+port={{ .Env.PORT }}
+
+# the name of the kafka cluster
+cluster.name={{ .Env.CLUSTER_NAME }}
+
+# kafka broker(s)
+# e.g. kafkaone.server.com:9092,kafkatwo.server.com:9092
+bootstrap.servers={{ .Env.KAFKA_BROKERS }}
+
+# the time the consumer spends waiting in poll() if data is not available, in milliseconds
+timeout={{ .Env.CONSUMER_TIMEOUT }}
+
+# filter out topics and consumers we don't want to see
+{{if .Env.TOPIC_FILTER}}
+filters.topic={{ .Env.TOPIC_FILTER}}
+{{- end}}
+
+{{if .Env.CONSUMER_FILTER}}
+filters.consumer={{ .Env.CONSUMER_FILTER }}
+{{- end}}
+
+# UI style
+# one of [tree|graph]
+# 'tree' is a collapsable directory-like listing
+# 'graph' is a collapsable graph view
+ui.style={{ .Env.UI_STYLE }}

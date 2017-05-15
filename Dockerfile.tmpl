@@ -1,0 +1,27 @@
+FROM ubuntu:16.04
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y  software-properties-common && \
+    add-apt-repository ppa:webupd8team/java -y && \
+    apt-get update && \
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
+    apt-get install -y wget oracle-java8-installer && \
+    apt-get clean
+
+RUN mkdir -p /app/tools
+WORKDIR /app
+
+ENV DOCKERIZE_VERSION v0.3.0
+
+RUN wget https://github.com/jwilder/dockerize/releases/download/"${DOCKERIZE_VERSION}"/dockerize-linux-amd64-"${DOCKERIZE_VERSION}".tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-"${DOCKERIZE_VERSION}".tar.gz
+
+ADD VERSION .
+ADD LICENSE .
+ADD README.md .
+ADD conf /app/conf
+ADD scripts /app/scripts
+ADD target/consumer-graph-CONSUMERGRAPH_VERSION-jar-with-dependencies.jar /app/consumer-graph-CONSUMERGRAPH_VERSION-jar-with-dependencies.jar
+
+CMD ./scripts/run.sh

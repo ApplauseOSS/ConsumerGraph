@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Terminates after first error
+set -e
+
+# NOTE: this tests that _all_ brokers are up.
+IFS=',' read -a brokers <<< "${KAFKA_BROKERS}"
+for broker in "${brokers[@]}"
+do
+    dockerize -wait "tcp://${broker}" -timeout 300s
+done
+
+dockerize -template /app/conf/config.tmpl:/app/config.properties
+dockerize -template /app/conf/log4j.tmpl:/app/log4j.properties
+
+java -Dlog4j.configuration="file:/app/log4j.properties" -jar consumer-graph-CONSUMERGRAPH_VERSION-jar-with-dependencies.jar --config /app/config.properties
